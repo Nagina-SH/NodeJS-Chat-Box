@@ -17,6 +17,16 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('User was disconnected');
   });
+  
+  socket.emit('newEmail', {
+	  from: 'shail@gmail.com',
+	  text: 'Hi, I mean',
+	  createdAt: 123
+  });
+  
+  socket.on('createEmail', (newmail) => {
+	  console.log('createEmail', newmail);
+  });
 });
 
 server.listen(port, () => {
