@@ -18,22 +18,24 @@ io.on('connection', (socket) => {
     console.log('User was disconnected');
   });
   
-  // socket.emit('newEmail', {
-	  // from: 'shail@gmail.com',
-	  // text: 'Hi, I mean',
-	  // createdAt: 123
-  // });
+  //user event to user
   
-  // socket.emit('newMessage', {
-	// from: 'John',
-	// text: 'See you there',
-	// createdAt: 1234
-  // });
-  // socket.on for single user
-  //io.emit for all connected user
+	socket.emit('newMessage', {
+		from: 'Admin',
+		text: 'Welcome to the chat app',
+		createdAt: new Date().getTime()
+	});
   
-  socket.on('createMessage', function(Message){
-	  console.log('Message', Message);
+  // admin text to new user joined
+  
+	socket.broadcast.emit('newMessage', {
+		from: 'Admin',
+		text: 'New user joined',
+		createdAt: new Date().getTime()
+	});
+  
+	socket.on('createMessage', function(Message){
+	  //console.log('Message', Message);
 
 	  //get message from client user and send it back to all users vie io.emit
 	  
@@ -43,7 +45,13 @@ io.on('connection', (socket) => {
 		  createdAt: new Date().getTime()
 	  });
 	  
-  });
+	  // socket.broadcast.emit('newMessage', {
+		  // from: Message.from,
+		  // text: Message.text,
+		  // createdAt: new Date().getTime()
+	  // });
+	  
+	});
   // socket.on('createEmail', (newmail) => {
 	  // console.log('createEmail', newmail);
   // });

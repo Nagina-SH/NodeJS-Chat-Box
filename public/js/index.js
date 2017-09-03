@@ -17,10 +17,10 @@ var socket = io();
 		// message: 'Hello Laddu'
 	// });
 	
-	socket.emit('createMessage', {
-		from: 'Andrew',
-		text: 'Yep! I am online'
-	});
+	// socket.emit('createMessage', {
+		// from: 'Andrew',
+		// text: 'Yep! I am online'
+	// });
 	
 	socket.on('newMessage', function(Message){
 		console.log('New Message', Message);
