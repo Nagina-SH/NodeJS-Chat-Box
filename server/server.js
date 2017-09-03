@@ -18,16 +18,39 @@ io.on('connection', (socket) => {
     console.log('User was disconnected');
   });
   
-  socket.emit('newEmail', {
-	  from: 'shail@gmail.com',
-	  text: 'Hi, I mean',
-	  createdAt: 123
-  });
+  // socket.emit('newEmail', {
+	  // from: 'shail@gmail.com',
+	  // text: 'Hi, I mean',
+	  // createdAt: 123
+  // });
   
-  socket.on('createEmail', (newmail) => {
-	  console.log('createEmail', newmail);
+  // socket.emit('newMessage', {
+	// from: 'John',
+	// text: 'See you there',
+	// createdAt: 1234
+  // });
+  // socket.on for single user
+  //io.emit for all connected user
+  
+  socket.on('createMessage', function(Message){
+	  console.log('Message', Message);
+
+	  //get message from client user and send it back to all users vie io.emit
+	  
+	  io.emit('newMessage', {
+		  from: Message.from,
+		  text: Message.text,
+		  createdAt: new Date().getTime()
+	  });
+	  
   });
+  // socket.on('createEmail', (newmail) => {
+	  // console.log('createEmail', newmail);
+  // });
 });
+
+
+
 
 server.listen(port, () => {
   console.log(`Server is up on ${port}`);

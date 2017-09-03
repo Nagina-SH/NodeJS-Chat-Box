@@ -12,7 +12,16 @@ var socket = io();
 		console.log('new mail', email);
 	});
 	
-	socket.emit('createEmail', {
-		to: 'Kanya@gmail.com',
-		message: 'Hello Laddu'
+	// socket.emit('createEmail', {
+		// to: 'Kanya@gmail.com',
+		// message: 'Hello Laddu'
+	// });
+	
+	socket.emit('createMessage', {
+		from: 'Andrew',
+		text: 'Yep! I am online'
+	});
+	
+	socket.on('newMessage', function(Message){
+		console.log('New Message', Message);
 	});
