@@ -16,16 +16,17 @@ var socket = io();
 	// socket.emit('createMessage', {
 		// from: 'Andrew',
 		// text: 'Yep! I am online'
-	// }, function(data) {
+	// }, function(data) { 
 		// console.log('Got it', data);
 	// }
 	// );
 	
 	socket.on('newMessage', function(Message){
 		console.log('New Message', Message);
+		var formattedTime = moment(Message.createAt).format('h:mm a');
 		
 		var li = jQuery('<li></li>');
-		li.text(`${Message.from}: ${Message.text}`);
+		li.text(`${Message.from} ${formattedTime}: ${Message.text}`);
 		
 		jQuery('#messages').append(li);
 	});
@@ -33,10 +34,12 @@ var socket = io();
 	
 	socket.on('newLocationMessage', function(Message){
 		console.log('New Message', Message);
+		var formattedTime = moment(Message.createAt).format('h:mm a');
+		
 		var li = jQuery('<li></li>');
 		var a = jQuery('<a target="_blank">My current location</a>');
 		
-		li.text(`${Message.from}: `);
+		li.text(`${Message.from} ${formattedTime}: `);
 		a.attr('href', Message.url);
 		li.append(a);
 		
